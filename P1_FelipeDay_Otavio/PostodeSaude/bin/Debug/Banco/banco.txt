@@ -1,0 +1,51 @@
+CREATE DATABASE SistemaVacinas;
+
+USE SistemaVacinas;
+
+drop database SistemaVacinas
+
+CREATE TABLE Funcionarios (
+    FuncionarioID INT PRIMARY KEY IDENTITY(1,1),
+    Nome NVARCHAR(100) NOT NULL,
+	Usuario NVARCHAR(100) NOT NULL,
+	Senha NVARCHAR(100) NOT NULL,
+    Cargo NVARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Pacientes (
+    PacienteID INT PRIMARY KEY IDENTITY(1,1),
+    NomeCompleto NVARCHAR(100) NOT NULL,
+	NomeUsuario NVARCHAR(100) NOT NULL,
+    Endereco NVARCHAR(100) NOT NULL,
+	Filiacao NVARCHAR(100) NOT NULL,
+	DataNascimento NVARCHAR(100) NOT NULL,
+	Fone NVARCHAR(100) NOT NULL,
+	Certidao NVARCHAR(100) NOT NULL,
+	FOTO NVARCHAR(100) NOT NULL,
+);
+
+CREATE TABLE Vacinas (
+    VacinaID INT PRIMARY KEY IDENTITY(1,1),
+    Nome NVARCHAR(100) NOT NULL,
+    DataAplicacao DATE NOT NULL,
+    PacienteID INT,
+    FuncionarioID INT,
+    FOREIGN KEY (PacienteID) REFERENCES Pacientes(PacienteID),
+    FOREIGN KEY (FuncionarioID) REFERENCES Funcionarios(FuncionarioID)
+);
+
+
+
+INSERT INTO Funcionarios (Nome, Usuario, Senha, Cargo) VALUES
+('João Silva', 'joao.silva', 'senha123', 'Enfermeiro'),
+('Maria Oliveira', 'maria.oliveira', 'senha456', 'Médico'),
+('Admin','admin','admin1','Admin'),
+('Carlos Pereira', 'carlos.pereira', 'senha789', 'Técnico');
+
+SELECT * FROM Funcionarios 
+
+ALTER TABLE Funcionarios ADD Ativo BIT DEFAULT 1;
+UPDATE Funcionarios SET Ativo = 1;
+
+
+
